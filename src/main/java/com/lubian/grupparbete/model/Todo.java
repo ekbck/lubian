@@ -1,15 +1,23 @@
 package com.lubian.grupparbete.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+@Table(name = "todo")
 public class Todo {
 
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = true)
+    private Long id;
+
+    @Column(name="body")
     private String body;
 
 }

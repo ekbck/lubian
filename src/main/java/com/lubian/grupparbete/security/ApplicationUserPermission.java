@@ -1,11 +1,10 @@
 package com.lubian.grupparbete.security;
 
 public enum ApplicationUserPermission {
-    DUMMY_READ("admin:read"),
-    DUMMY_WRITE("admin:write"),
-    GUEST_READ("todo:read"),
-    GUEST_WRITE("todo:write");
-
+    USER_READ("user:read"),
+    USER_WRITE("user:write"),
+    TODO_READ("todo:read"),
+    TODO_WRITE("todo:write");
 
     private String permission;
 

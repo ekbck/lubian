@@ -6,12 +6,12 @@ import java.util.Set;
 
 import static com.lubian.grupparbete.security.ApplicationUserPermission.*;
 public enum ApplicationUserRole {
-    GUEST(Sets.newHashSet()),
+    USER(Sets.newHashSet()),
     ADMIN(Sets.newHashSet(
-            DUMMY_WRITE,
-            DUMMY_READ,
-            GUEST_READ,
-            GUEST_WRITE));
+            USER_READ,
+            USER_WRITE,
+            TODO_READ,
+            TODO_WRITE));
 
     public Set<ApplicationUserPermission> getPermissions() {
         return permissions;

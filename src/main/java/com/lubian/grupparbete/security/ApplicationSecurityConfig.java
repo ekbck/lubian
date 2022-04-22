@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import static com.lubian.grupparbete.security.ApplicationUserRole.ADMIN;
-import static com.lubian.grupparbete.security.ApplicationUserRole.GUEST;
+import static com.lubian.grupparbete.security.ApplicationUserRole.USER;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +42,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         UserDetails ludde = User.builder()
                 .username("Ludde")
                 .password(passwordEncoder.encode("hej"))
-                .roles(GUEST.name())
+                .roles(USER.name())
                 .build();
 
         UserDetails fabian = User.builder()
