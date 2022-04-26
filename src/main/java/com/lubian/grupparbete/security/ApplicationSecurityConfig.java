@@ -3,6 +3,8 @@ package com.lubian.grupparbete.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +19,7 @@ import static com.lubian.grupparbete.security.ApplicationUserRole.USER;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -29,8 +32,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/myApp/todo/json/1003").permitAll()
+                .antMatchers(HttpMethod.DELETE,"todo/json/delete/**").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -40,20 +44,20 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Bean
     protected UserDetailsService userDetailsService() {
-        UserDetails ludde = User.builder()
-                .username("Ludde")
+        UserDetails user = User.builder()
+                .username("user")
                 .password(passwordEncoder.encode("hej"))
                 .roles(USER.name())
                 .authorities(USER.getGrantedAuthorities())
                 .build();
 
-        UserDetails fabian = User.builder()
-                .username("Fabian")
+        UserDetails admin = User.builder()
+                .username("admin")
                 .password(passwordEncoder.encode("hej"))
                 .roles(ADMIN.name())
                 .authorities(ADMIN.getGrantedAuthorities())
                 .build();
 
-        return new InMemoryUserDetailsManager(ludde, fabian);
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }

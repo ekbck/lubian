@@ -14,7 +14,7 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
-    public Iterable<Todo> getAllTodos() {
+    public List<Todo> getAllTodos() {
         return todoRepository.findAll();
     }
 
@@ -32,19 +32,36 @@ public class TodoService {
 //            System.out.println("not found");
 //        }
 //    }
-//    public void saveTodo(Todo todo) {
-//        todoRepository.save(todo);
-//    }
+    public void saveTodo(Todo todo) {
+        todoRepository.save(todo);
+    }
+
+    public Todo createTodo(Todo newTodo) {
+        return todoRepository.save(newTodo);
+    }
 
 
-
-        public Todo updateTodo(Long id, Todo todo) {
+    public Todo updateTodo(Long id, Todo todo) {
         Optional<Todo> TodoOptional = todoRepository.findById(id);
-
         if (!TodoOptional.isPresent()) {
             throw new EntityNotFoundException(todo.getId().toString());
         }
-        return todoRepository.save(todo);
+        Todo updatedTodo = TodoOptional.get();
+        updatedTodo.setId(id);
+        return todoRepository.save(updatedTodo);
+    }
+
+    public void deleteTodo(Todo todo) {
+        todoRepository.delete(todo);
+    }
+
+    public Todo deleteTodoBetter(Long id) {
+        Optional<Todo> TodoOptional = todoRepository.findById(id);
+        if (!TodoOptional.isPresent()) {
+            throw new EntityNotFoundException(id.toString());
+        }
+        todoRepository.deleteById(id);
+        return TodoOptional.get();
     }
 
 }

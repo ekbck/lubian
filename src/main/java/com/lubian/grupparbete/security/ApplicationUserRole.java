@@ -10,8 +10,6 @@ import static com.lubian.grupparbete.security.ApplicationUserPermission.*;
 public enum ApplicationUserRole {
     USER(Sets.newHashSet()),
     ADMIN(Sets.newHashSet(
-            USER_READ,
-            USER_WRITE,
             TODO_READ,
             TODO_WRITE));
 
