@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,9 @@ public class TodoService {
         todoRepository.save(todo);
     }
 
-    public Todo createTodo(Todo newTodo) {
+    public Todo createTodo(Todo todo) {
+        Todo newTodo = new Todo();
+        newTodo.setBody(todo.getBody());
         return todoRepository.save(newTodo);
     }
 

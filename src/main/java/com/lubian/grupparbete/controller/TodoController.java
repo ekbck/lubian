@@ -35,18 +35,18 @@ public class TodoController {
         }
     }
     
-    @PostMapping(path = "todo/json/create")
-    public ResponseEntity<?> register(@Param("body") String body) {
-        try {
-            Todo newTodo = new Todo();
-            newTodo.setBody(body);
-            todoService.saveTodo(newTodo);
-            String responseMessage = "New todo " + newTodo.getId() + " \"" + newTodo.getBody() + "\" created";
-            return new ResponseEntity<>(responseMessage, HttpStatus.CREATED);
-        } catch(NoSuchElementException error) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+//    @PostMapping(path = "todo/json/create")
+//    public ResponseEntity<?> register(@Param("body") String body) {
+//        try {
+//            Todo newTodo = new Todo();
+//            newTodo.setBody(body);
+//            todoService.saveTodo(newTodo);
+//            String responseMessage = "New todo " + newTodo.getId() + " \"" + newTodo.getBody() + "\" created";
+//            return new ResponseEntity<>(responseMessage, HttpStatus.CREATED);
+//        } catch(NoSuchElementException error) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     // TODO - FIX THIS LUDDE
     @PostMapping(path = "/todo/json/create")
