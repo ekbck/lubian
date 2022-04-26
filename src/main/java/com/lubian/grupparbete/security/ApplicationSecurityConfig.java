@@ -30,6 +30,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/myApp/todo/json/1003").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -43,12 +44,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .username("Ludde")
                 .password(passwordEncoder.encode("hej"))
                 .roles(USER.name())
+                .authorities(USER.getGrantedAuthorities())
                 .build();
 
         UserDetails fabian = User.builder()
                 .username("Fabian")
                 .password(passwordEncoder.encode("hej"))
                 .roles(ADMIN.name())
+                .authorities(ADMIN.getGrantedAuthorities())
                 .build();
 
         return new InMemoryUserDetailsManager(ludde, fabian);

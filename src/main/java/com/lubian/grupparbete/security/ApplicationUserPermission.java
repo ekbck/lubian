@@ -8,7 +8,7 @@ public enum ApplicationUserPermission {
 
     private String permission;
 
-    ApplicationUserPermission(String s) {
+    ApplicationUserPermission(String permission) {
         this.permission = permission;
     }
     public String getPermission() {
