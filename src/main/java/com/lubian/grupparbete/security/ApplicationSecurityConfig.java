@@ -34,11 +34,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.DELETE,"todo/json/delete/**").hasRole(ADMIN.name())
+                .antMatchers(HttpMethod.DELETE,"todo/json/**").hasRole(ADMIN.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                //.httpBasic();
+                .formLogin()
+                .defaultSuccessUrl("/todo/start", true)
+                .and()
+                .logout();
     }
 
     @Override

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo</title>
+</head>
+<body>
+
+    <h1 th:text="${todo.body}"></h1>
+
+    <form th:action="@{/todo/update/{id}(id=${todo.id})}" th:object="${todo}" th:method="put">
+        <input type="text" th:field="*{body}" name="todo" placeholder="Update todo" />
+        <input type="submit" value="Update" />
+    </form>
+
+    <form action="#" th:action="@{/todo/delete/{id}(id=${todo.id})}" th:method="delete">
+        <input type="submit" value="Delete"/>
+    </form>
+</body>
+</html>

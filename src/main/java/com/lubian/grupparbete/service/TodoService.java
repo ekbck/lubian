@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,26 +14,10 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
-    public List<Todo> getAllTodos() {
-        return todoRepository.findAll();
-    }
+    public List<Todo> getAllTodos() {return todoRepository.findAll();}
 
     public Todo findTodoById(Long id) {
         return todoRepository.findById(id).get();
-    }
-
-//    public void changeTodoById(Long id, String newBody){
-//        Optional<Todo> TodoToChange = todoRepository.findById(id);
-//        if(TodoToChange.isPresent()){
-//            Todo todo = TodoToChange.get();
-//            todo.setBody(newBody);
-//            todoRepository.save(todo);
-//        }else{
-//            System.out.println("not found");
-//        }
-//    }
-    public void saveTodo(Todo todo) {
-        todoRepository.save(todo);
     }
 
     public Todo createTodo(Todo todo) {
@@ -43,22 +26,17 @@ public class TodoService {
         return todoRepository.save(newTodo);
     }
 
-
     public Todo updateTodo(Long id, Todo todo) {
         Optional<Todo> TodoOptional = todoRepository.findById(id);
         if (!TodoOptional.isPresent()) {
             throw new EntityNotFoundException(todo.getId().toString());
         }
         Todo updatedTodo = TodoOptional.get();
-        updatedTodo.setId(id);
+        updatedTodo.setBody(todo.getBody());
         return todoRepository.save(updatedTodo);
     }
 
-    public void deleteTodo(Todo todo) {
-        todoRepository.delete(todo);
-    }
-
-    public Todo deleteTodoBetter(Long id) {
+    public Todo deleteTodo(Long id) {
         Optional<Todo> TodoOptional = todoRepository.findById(id);
         if (!TodoOptional.isPresent()) {
             throw new EntityNotFoundException(id.toString());
