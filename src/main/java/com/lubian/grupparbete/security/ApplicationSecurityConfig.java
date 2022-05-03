@@ -40,7 +40,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //.httpBasic();
                 .formLogin()
-                .defaultSuccessUrl("/todo/start", true)
+//                .defaultSuccessUrl("/todo/start", true)
                 .and()
                 .logout();
     }

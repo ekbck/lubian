@@ -39,21 +39,21 @@ public class TodoViewController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute Todo todo) {
+    public String save(@ModelAttribute Todo todo) {
         todo.setBody(todo.getBody());
         todoService.createTodo(todo);
 
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("createdTodo");
-        modelAndView.addObject("todo", todo);
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("start");
+//        modelAndView.addObject("todo", todo);
 
-        return modelAndView;
+        return "redirect:/todo/start";
     }
 
     @PutMapping(value = "/update/{id}")
     public String updateTodo(@Param("todo")@PathVariable("id") Long id, Todo todo) {
         todoService.updateTodo(id, todo);
-        return "redirect:/todo/" + id;
+        return "redirect:/todo/start";
     }
 
     @DeleteMapping(value = "/delete/{id}")
