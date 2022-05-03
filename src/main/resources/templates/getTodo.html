@@ -11,14 +11,14 @@
 <div style=" display:flex; height: 100vh; width: 100vw; align-items: center; justify-content: center">
 <div class="container">
 
-<form th:action="@{/todo/update/{id}(id=${todo.id})}" th:object="${todo}" th:method="put">
-        <input type="text" th:field="*{body}" name="todo" placeholder="Update todo" />
-        <input type="submit" value="Update" />
+    <form class="update-form" th:action="@{/todo/update/{id}(id=${todo.id})}" th:object="${todo}" th:method="put">
+        <input class="text-input" type="text" th:field="*{body}" name="todo" placeholder="Update todo" />
+        <input class="btn btn-warning" type="submit" value="Update" />
     </form>
 
 
-    <form action="#" th:action="@{/todo/delete/{id}(id=${todo.id})}" th:method="delete">
-        <input type="submit" value="Delete"/>
+    <form  class="delete-form" action="#" th:action="@{/todo/delete/{id}(id=${todo.id})}" th:method="delete">
+        <input class="btn btn-danger" type="submit" value="Delete"/>
     </form>
 </div>
 </div>

@@ -38,11 +38,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                //.httpBasic();
-                .formLogin()
-//                .defaultSuccessUrl("/todo/start", true)
-                .and()
-                .logout();
+                .httpBasic();
+                //.formLogin()
+                //.defaultSuccessUrl("/todo/start", true)
+                //.and()
+                //.logout();
     }
 
     @Override

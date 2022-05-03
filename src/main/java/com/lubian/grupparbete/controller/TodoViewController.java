@@ -4,6 +4,7 @@ import com.lubian.grupparbete.model.Todo;
 import com.lubian.grupparbete.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +43,6 @@ public class TodoViewController {
     public String save(@ModelAttribute Todo todo) {
         todo.setBody(todo.getBody());
         todoService.createTodo(todo);
-
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("start");
-//        modelAndView.addObject("todo", todo);
-
         return "redirect:/todo/start";
     }
 
@@ -57,14 +53,9 @@ public class TodoViewController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteTodo(@PathVariable("id") Long id) {
-
-        try {
-            todoService.deleteTodo(id);
-        } catch(HttpClientErrorException.Forbidden e) {
-            return "Not allowed, loser";
-        }
-
+        todoService.deleteTodo(id);
         return "redirect:/todo/start";
     }
 

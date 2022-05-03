@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static com.lubian.grupparbete.security.ApplicationUserPermission.*;
 public enum ApplicationUserRole {
-    USER(Sets.newHashSet()),
+    USER(Sets.newHashSet(TODO_READ)),
     ADMIN(Sets.newHashSet(
             TODO_READ,
             TODO_WRITE));
