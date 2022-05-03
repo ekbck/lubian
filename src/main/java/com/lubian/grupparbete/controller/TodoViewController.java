@@ -8,8 +8,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -47,6 +45,7 @@ public class TodoViewController {
     }
 
     @PutMapping(value = "/update/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateTodo(@Param("todo")@PathVariable("id") Long id, Todo todo) {
         todoService.updateTodo(id, todo);
         return "redirect:/todo/start";
